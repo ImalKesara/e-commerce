@@ -1,9 +1,9 @@
 <script>
 	import '../app.css';
-	let {children} = $props();
+	let { children } = $props();
 </script>
 
-<!-- equal to slot we called this is snippets -->
-{@render children()} 
-
-
+<div class="min-h-screen bg-background font-sans antialiased">
+	<!-- equal to slot we called this is snippets -->
+	{@render children()}
+</div>

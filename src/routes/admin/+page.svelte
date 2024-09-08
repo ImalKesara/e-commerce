@@ -1,5 +1,7 @@
 <script lang="ts">
 	import * as Card from '$lib/components/ui/card';
+	import { formatCurrency, formatNumber } from '$lib/utils';
+
 
 	type DashboardCardProps = {
 		title: string;
@@ -9,9 +11,9 @@
 </script>
 
 <div class="grid grid-cols-1 gap-x-3 md:grid-cols-2 lg:grid-cols-3">
-	{@render dashboardCard({ title: 'Total Sales', subtitle: 'This month', body: '$10,00,000' })}
-	{@render dashboardCard({ title: 'Total Sales', subtitle: 'This month', body: '$10,00,000' })}
-	{@render dashboardCard({ title: 'Total Sales', subtitle: 'This month', body: '$10,00,000' })}
+	{@render dashboardCard({ title: 'Total Sales', subtitle: `${formatNumber(2000)} Orders`, body: `${formatCurrency(500)}` })}
+	{@render dashboardCard({ title: 'Total Sales', subtitle: `${formatNumber(3000)} Orders`, body: `${formatCurrency(1500)}` })}
+	{@render dashboardCard({ title: 'Total Sales', subtitle: `${formatNumber(3500)} Orders`, body: `${formatCurrency(1200)}` })}
 </div>
 
 {#snippet dashboardCard({ title, subtitle, body }: DashboardCardProps)}

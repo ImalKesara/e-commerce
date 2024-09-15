@@ -12,21 +12,21 @@
 	let { productData, userData, salesData } = $derived(data);
 </script>
 
-<div class="grid grid-cols-1 gap-x-3 md:grid-cols-2 lg:grid-cols-3">
+<div class="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3">
 	{@render dashboardCard({
 		title: 'Sales',
 		subtitle: `${formatNumber(salesData.numberofSales)} Orders`,
-		body: `${formatCurrency(salesData.amount)}`
+		body: formatCurrency(salesData.amount)
 	})}
 	{@render dashboardCard({
-		title: 'Total Sales',
-		subtitle: `${formatNumber(3000)} Orders`,
-		body: `${formatCurrency(1500)}`
+		title: 'Customers',
+		subtitle: `${formatCurrency(userData.avgValuePerUser)} Average value`,
+		body: formatNumber(userData.userCount)
 	})}
 	{@render dashboardCard({
-		title: 'Total Sales',
-		subtitle: `${formatNumber(3500)} Orders`,
-		body: `${formatCurrency(1200)}`
+		title: 'Active Products',
+		subtitle: `${formatNumber(productData.inactiveCount)} Inactive`,
+		body: formatNumber(productData.activeCount)
 	})}
 </div>
 

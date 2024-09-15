@@ -1,6 +1,8 @@
 <script lang="ts">
 	//cni cmd
 	import { Button } from '$lib/components/ui/button';
+	import { CheckCheck } from 'lucide-svelte';
+
 	import PageHeader from '$lib/components/PageHeader.svelte';
 	import * as Table from '$lib/components/ui/table';
 	let { data } = $props();
@@ -26,9 +28,14 @@
 		</Table.Row>
 	</Table.Header>
 	<Table.Body>
-		{#each data.product as product}
+		{#each data.product as productz}
 			<Table.Row>
-				<Table.Cell class="font-medium"></Table.Cell>
+				<Table.Cell class="font-medium">
+					{#if productz.isAvailableForPurchase}
+						<span>Availabel</span>
+						<CheckCheck />
+					{/if}
+				</Table.Cell>
 				<Table.Cell>Paid</Table.Cell>
 				<Table.Cell>Credit Card</Table.Cell>
 				<Table.Cell class="text-right">.00</Table.Cell>

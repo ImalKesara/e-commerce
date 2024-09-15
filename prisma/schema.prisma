@@ -22,7 +22,7 @@ model User {
   hashedPassword String? //? means optional not required
 }
 
-model Product {
+model Product{
   p_id                   String                 @id @default(uuid())
   p_name                 String
   priceInCents           Int

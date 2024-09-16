@@ -2,14 +2,20 @@
 	//cni cmd
 	import { Button } from '$lib/components/ui/button';
 	import { CheckCheck } from 'lucide-svelte';
-
 	import PageHeader from '$lib/components/PageHeader.svelte';
 	import * as Table from '$lib/components/ui/table';
+	import { ListCollapse } from 'lucide-svelte';
+	import { X } from 'lucide-svelte';
+	import { formatCurrency, formatNumber } from '$lib/utils';
+	import * as DropdownMenu from '$lib/components/ui/dropdown-menu';
+	import { enhance } from '$app/forms';
+
 	let { data } = $props();
 </script>
 
 <div class="flex items-center justify-between gap-4">
 	<PageHeader>products</PageHeader>
+
 	<!-- cnx cmd-->
 	<Button href="/admin/product/new">Add Products</Button>
 </div>
@@ -22,6 +28,7 @@
 			</Table.Head>
 			<Table.Head>Name</Table.Head>
 			<Table.Head>Price</Table.Head>
+			<Table.Head>Order</Table.Head>
 			<Table.Head class="w-0">
 				<span class="sr-only">Actions</span>
 			</Table.Head>
@@ -34,11 +41,42 @@
 					{#if productz.isAvailableForPurchase}
 						<span>Availabel</span>
 						<CheckCheck />
+					{:else}
+						<span>Unavailabel</span>
+						<X />
 					{/if}
 				</Table.Cell>
-				<Table.Cell>Paid</Table.Cell>
-				<Table.Cell>Credit Card</Table.Cell>
-				<Table.Cell class="text-right">.00</Table.Cell>
+				<Table.Cell>{productz.p_name}</Table.Cell>
+				<Table.Cell>{formatCurrency(productz.priceInCents / 100)}</Table.Cell>
+				<Table.Cell>{formatNumber(productz._count.order)}</Table.Cell>
+				<Table.Cell class="text-right">
+					<DropdownMenu.Root>
+						<DropdownMenu.Trigger>
+							<ListCollapse />
+							<span class="sr-only">Actions</span>
+						</DropdownMenu.Trigger>
+						<DropdownMenu.Content>
+							<DropdownMenu.Item href="/admin/product/{productz.p_id}/download" download
+								>Download</DropdownMenu.Item
+							><DropdownMenu.Item href="/admin/product/{productz.p_id}/edit">Edit</DropdownMenu.Item
+							>
+							<!-- toggle availability -->
+							<form action="?/toggleAvailability" method="POST" use:enhance>
+								<button type="submit" class="w-full">
+									<DropdownMenu.Item>
+										{#if productz.isAvailableForPurchase}
+											Deactive
+										{:else}
+											Activate
+										{/if}
+									</DropdownMenu.Item>
+								</button>
+							</form>
+							<!-- delete -->
+							<form action=""></form>
+						</DropdownMenu.Content>
+					</DropdownMenu.Root>
+				</Table.Cell>
 			</Table.Row>
 		{/each}
 	</Table.Body>

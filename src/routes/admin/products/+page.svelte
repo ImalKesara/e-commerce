@@ -17,7 +17,7 @@
 	<PageHeader>products</PageHeader>
 
 	<!-- cnx cmd-->
-	<Button href="/admin/product/new">Add Products</Button>
+	<Button href="/admin/products/new">Add Products</Button>
 </div>
 
 <Table.Root>
@@ -71,6 +71,13 @@
 										{/if}
 									</DropdownMenu.Item>
 								</button>
+								<input type="hidden" name="p_id" value={productz.p_id} />
+								<input
+									type="checkbox"
+									name="isAvailableForPurchase"
+									class="hidden"
+									checked={!productz.isAvailableForPurchase}
+								/>
 							</form>
 							<!-- delete -->
 							<form action=""></form>

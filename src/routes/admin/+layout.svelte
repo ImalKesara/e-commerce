@@ -12,7 +12,7 @@
 
 <Navbar>
 	{@render navLink({ href: '/admin', text: 'Dashboard' })}
-	{@render navLink({ href: '/admin/product', text: 'Product' })}
+	{@render navLink({ href: '/admin/products', text: 'Products' })}
 	{@render navLink({ href: '/admin/users', text: 'Customers' })}
 	{@render navLink({ href: '/admin/orders', text: 'Orders' })}
 </Navbar>

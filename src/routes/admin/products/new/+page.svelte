@@ -5,13 +5,18 @@
 	import { Input } from '$lib/components/ui/input';
 	import { addFormSchema } from '$lib/formSchema.js';
 	import { formatCurrency } from '$lib/utils.js';
-	import { superForm } from 'sveltekit-superforms';
+	import { superForm, fileProxy } from 'sveltekit-superforms';
 	import { zodClient } from 'sveltekit-superforms/adapters';
+	import { Textarea } from '$lib/components/ui/textarea';
+	import { Loader2 } from 'lucide-svelte';
+
 	let { data } = $props();
 	let form = superForm(data.form, {
 		validators: zodClient(addFormSchema)
 	});
 	let { form: formData, delayed } = form;
+	const image = fileProxy(formData, 'image');
+	const file = fileProxy(formData, 'file');
 </script>
 
 <PageHeader>Add Product</PageHeader>
@@ -20,7 +25,7 @@
 	action="/admin/products/new"
 	class="space-y-8"
 	method="POST"
-	enctype="multipart/form-data "
+	enctype="multipart/form-data"
 	use:enhance
 >
 	<!-- name -->
@@ -46,5 +51,36 @@
 			>
 		</p>
 	</div>
-	<Form.Button>Submit</Form.Button>
+	<!-- Description -->
+	<Form.Field {form} name="description">
+		<Form.Control let:attrs>
+			<Form.Label>Description</Form.Label>
+			<Textarea {...attrs} bind:value={$formData.description} />
+		</Form.Control>
+		<Form.FieldErrors />
+	</Form.Field>
+	<!-- File -->
+	<Form.Field {form} name="file">
+		<Form.Control let:attrs>
+			<Form.Label>File</Form.Label>
+			<Input {...attrs} type="file" bind:files={$file} />
+		</Form.Control>
+		<Form.FieldErrors />
+	</Form.Field>
+	<!-- image -->
+	<Form.Field {form} name="image">
+		<Form.Control let:attrs>
+			<Form.Label>Product image</Form.Label>
+			<!--                      accept any image file  -->
+			<Input {...attrs} accept="image/*" type="file" bind:files={$image} />
+		</Form.Control>
+		<Form.FieldErrors />
+	</Form.Field>
+	<Form.Button type="submit">
+		{#if $delayed}
+			<Loader2 class="size-4 animate-spin" />
+		{:else}
+			Save
+		{/if}
+	</Form.Button>
 </form>

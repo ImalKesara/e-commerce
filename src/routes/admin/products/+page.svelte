@@ -39,10 +39,10 @@
 			<Table.Row>
 				<Table.Cell class="font-medium">
 					{#if productz.isAvailableForPurchase}
-						<span>Availabel</span>
+						<span>Available</span>
 						<CheckCheck />
 					{:else}
-						<span>Unavailabel</span>
+						<span>Unavailable</span>
 						<X />
 					{/if}
 				</Table.Cell>

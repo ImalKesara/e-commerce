@@ -8,7 +8,7 @@
 	import { superForm, fileProxy } from 'sveltekit-superforms';
 	import { zodClient } from 'sveltekit-superforms/adapters';
 	import { Textarea } from '$lib/components/ui/textarea';
-	import { Loader2 } from 'lucide-svelte';
+	import { Loader } from 'lucide-svelte';
 
 	let { data } = $props();
 	let form = superForm(data.form, {
@@ -78,7 +78,7 @@
 	</Form.Field>
 	<Form.Button type="submit">
 		{#if $delayed}
-			<Loader2 class="size-4 animate-spin" />
+			<Loader class="size-4 animate-spin" />
 		{:else}
 			Save
 		{/if}

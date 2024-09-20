@@ -61,7 +61,9 @@
 						<DropdownMenu.Content>
 							<DropdownMenu.Item href="/admin/product/{productz.p_id}/download" download
 								>Download</DropdownMenu.Item
-							><DropdownMenu.Item href="/admin/product/{productz.p_id}/edit">Edit</DropdownMenu.Item
+							>
+							<!-- Edit function -->
+							<DropdownMenu.Item href="/admin/product/{productz.p_id}/edit">Edit</DropdownMenu.Item
 							>
 							<!-- toggle availability -->
 							<form action="?/toggleAvailability" method="POST" use:enhance>

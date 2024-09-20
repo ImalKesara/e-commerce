@@ -5,16 +5,18 @@
 	import PageHeader from '$lib/components/PageHeader.svelte';
 	import * as Table from '$lib/components/ui/table';
 	import { ListCollapse } from 'lucide-svelte';
+	import { CircleX } from 'lucide-svelte';
 	import { X } from 'lucide-svelte';
 	import { formatCurrency, formatNumber } from '$lib/utils';
 	import * as DropdownMenu from '$lib/components/ui/dropdown-menu';
 	import { enhance } from '$app/forms';
+	import { EllipsisVertical } from 'lucide-svelte';
 
 	let { data } = $props();
 </script>
 
 <div class="flex items-center justify-between gap-4">
-	<PageHeader>products</PageHeader>
+	<PageHeader>Products</PageHeader>
 
 	<!-- cnx cmd-->
 	<Button href="/admin/products/new">Add Products</Button>
@@ -39,11 +41,11 @@
 			<Table.Row>
 				<Table.Cell class="font-medium">
 					{#if productz.isAvailableForPurchase}
-						<span>Available</span>
+						<!-- <span>Available</span> -->
 						<CheckCheck />
 					{:else}
-						<span>Unavailable</span>
-						<X />
+						<!-- <span>Unavailable</span> -->
+						<CircleX />
 					{/if}
 				</Table.Cell>
 				<Table.Cell>{productz.p_name}</Table.Cell>
@@ -52,7 +54,8 @@
 				<Table.Cell class="text-right">
 					<DropdownMenu.Root>
 						<DropdownMenu.Trigger>
-							<ListCollapse />
+							<EllipsisVertical />
+
 							<span class="sr-only">Actions</span>
 						</DropdownMenu.Trigger>
 						<DropdownMenu.Content>
@@ -80,7 +83,14 @@
 								/>
 							</form>
 							<!-- delete -->
-							<form action=""></form>
+							<form action="?/deleteProduct" method="POST" use:enhance>
+								<button class="w-full text-destructive" disabled={productz._count.order > 0}>
+									<DropdownMenu.Item type="submit" disabled={productz._count.order > 0}>
+										Delete
+									</DropdownMenu.Item>
+								</button>
+								<input type="hidden" name="p_id" value={productz.p_id} />
+							</form>
 						</DropdownMenu.Content>
 					</DropdownMenu.Root>
 				</Table.Cell>

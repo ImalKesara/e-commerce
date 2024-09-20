@@ -1,4 +1,6 @@
+import { request } from 'http';
 import { db } from '../../../hooks.server';
+import fs from 'fs/promises';
 
 export const load = async () => {
 	return {
@@ -31,5 +33,25 @@ export const actions = {
 				isAvailableForPurchase
 			}
 		});
+	},
+	deleteProduct: async ({ request }) => {
+		const formData = await request.formData();
+		const p_id = formData.get('p_id') as string;
+		const product = await db.product.findUnique({
+			where: {
+				p_id
+			},
+			select: {
+				_count: { select: { order: true } }
+			}
+		});
+		if (product && product._count.order > 0) return;
+		const deletedProduct = await db.product.delete({
+			where: {
+				p_id
+			}
+		});
+		await fs.unlink(deletedProduct.filePath);
+		await fs.unlink(`static${deletedProduct.imagePath}`);
 	}
 };

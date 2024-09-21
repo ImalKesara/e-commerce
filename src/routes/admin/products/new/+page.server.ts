@@ -17,11 +17,13 @@ export const actions = {
 		if (!form.valid) {
 			return fail(400, { form });
 		}
+		//file 
 		await fs.mkdir('products', { recursive: true });
 		const filePath = `products/${crypto.randomUUID()}-${form.data.file.name}`;
-		fs.writeFile(filePath, Buffer.from(await form.data.file.arrayBuffer()));
+		fs.writeFile(filePath, Buffer.from(await form.data.file.arrayBuffer())); //save this file on that directory
+		
+		//image
 		fs.mkdir('static/products', { recursive: true });
-
 		const imagePath = `/products/${crypto.randomUUID()}-${form.data.image.name}`;
 		fs.writeFile(`static${imagePath}`, Buffer.from(await form.data.image.arrayBuffer()));
 		try {

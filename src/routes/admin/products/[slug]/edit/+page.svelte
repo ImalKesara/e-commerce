@@ -12,7 +12,7 @@
 	import { page } from '$app/stores';
 	let { data } = $props();
 	let form = superForm(data.form, {
-		validators: zodClient(addFormSchema)
+		validators: zodClient(addFormSchema.partial({ image: true, file: true }))
 	});
 	const { form: formData, delayed } = form;
 	const image = fileProxy(formData, 'image');
@@ -62,7 +62,7 @@
 	<Form.Field {form} name="file">
 		<Form.Control let:attrs>
 			<Form.Label>File</Form.Label>
-			<Input {...attrs} type="file" bind:files={$file} />
+			<input {...attrs} type="file" bind:files={$file} />
 			<div class="text-muted-foreground">
 				{data.product.filePath}
 			</div>
@@ -74,7 +74,7 @@
 		<Form.Control let:attrs>
 			<Form.Label>Product image</Form.Label>
 			<!--                      accept any image file  -->
-			<Input {...attrs} accept="image/*" type="file" bind:files={$image} />
+			<input {...attrs} accept="image/*" type="file" bind:files={$image} />
 			<img src={data.product.imagePath} alt="products" class="h-[300px] w-[600px] object-cover" />
 		</Form.Control>
 		<Form.FieldErrors />

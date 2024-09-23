@@ -41,7 +41,7 @@ export const actions = {
 		if (form.data.image) {
 			await fs.unlink(`static${imagePath}`);
 			imagePath = `/products/${crypto.randomUUID()}-${form.data.image.name}`;
-			fs.writeFile(imagePath, Buffer.from(await form.data.image.arrayBuffer()));
+			fs.writeFile(`static${imagePath}`, Buffer.from(await form.data.image.arrayBuffer()));
 		}
 		try {
 			await db.product.update({

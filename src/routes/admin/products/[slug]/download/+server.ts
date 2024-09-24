@@ -12,9 +12,11 @@ export const GET = async ({ params: { slug } }) => {
 	//mp3 , jpg,png......
 	const extension = product.filePath.split('.').pop();
 
-	return new Response(file,{
-		headers:{
-			'Content-Type' : `application/${extension}`
+	return new Response(file, {
+		headers: {
+			'Content-Type': `application/${extension}`,
+			'Content-Length': size.toString(),
+			'Content-Disposition': `attachment;filename=${product.p_name}.${extension}`
 		}
 	});
 };

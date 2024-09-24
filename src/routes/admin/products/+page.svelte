@@ -59,7 +59,7 @@
 							<span class="sr-only">Actions</span>
 						</DropdownMenu.Trigger>
 						<DropdownMenu.Content>
-							<DropdownMenu.Item href="/admin/product/{productz.p_id}/download" download
+							<DropdownMenu.Item href="/admin/products/{productz.p_id}/download" download
 								>Download</DropdownMenu.Item
 							>
 							<!-- Edit function -->

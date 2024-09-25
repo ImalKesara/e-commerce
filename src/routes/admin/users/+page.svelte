@@ -9,11 +9,11 @@
 	let { data } = $props();
 </script>
 
-<PageHeader>Customers</PageHeader>
+<PageHeader>Customers </PageHeader>
 {#if data.users.length > 0}
 	{@render userTable()}
 {:else}
-	<p>No Customers Found 💥</p>
+	<p>No Customers Found</p>
 {/if}
 
 {#snippet userTable()}

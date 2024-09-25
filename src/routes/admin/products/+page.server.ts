@@ -44,6 +44,7 @@ export const actions = {
 				_count: { select: { order: true } }
 			}
 		});
+		//means if there are orders you cant delete products
 		if (product && product._count.order > 0) return;
 		const deletedProduct = await db.product.delete({
 			where: {

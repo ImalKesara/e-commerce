@@ -1,4 +1,3 @@
-import { request } from 'http';
 import { db } from '../../../hooks.server';
 export const load = async () => {
 	return {

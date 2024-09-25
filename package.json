@@ -38,6 +38,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@lucia-auth/adapter-prisma": "^4.0.1",
 		"@prisma/client": "5.19.1",
 		"bits-ui": "^0.21.13",
 		"clsx": "^2.1.1",

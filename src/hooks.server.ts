@@ -1,5 +1,4 @@
 import { PrismaClient } from '@prisma/client';
-import { lucia } from '$lib/server/auth';
 import { PrismaAdapter } from '@lucia-auth/adapter-prisma';
 import type { Handle } from '@sveltejs/kit';
 import { Lucia } from 'lucia';

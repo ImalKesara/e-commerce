@@ -15,6 +15,7 @@ export const load = async () => {
 export const actions = {
 	default: async (event) => {
 		const form = await superValidate(event, zod(loginFormSchema));
+		console.log('Default ~form ', form);
 		if (!form.valid) {
 			return fail(400, { form });
 		}
@@ -35,5 +36,8 @@ export const actions = {
 			path: '.',
 			...sessionCookie.attributes
 		});
-	}
+	},
+	
+
+	
 };
